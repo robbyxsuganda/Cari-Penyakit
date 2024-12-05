@@ -94,4 +94,25 @@ function renderPenyakitList() {
   });
 }
 
+function editPenyakit(id) {
+  const penyakit = penyakitList.find((p) => p.id === id);
+  // console.log(penyakit);
+
+  editingId = penyakit.id;
+  namaInput.value = penyakit.nama;
+  deskripsiInput.value = penyakit.deskripsi;
+  gejalaInput.value = penyakit.gejala.join(", ");
+  pengobatanInput.value = penyakit.pengobatan.join(", ");
+  gambarInput.value = penyakit.gambar;
+  tingkatInput.value = penyakit.tingkatPenyakit;
+  saveButton.textContent = "Update";
+}
+
+function deletePenyakit(id) {
+  penyakitList = penyakitList.filter((penyakit) => penyakit.id !== id);
+  console.log(penyakitList);
+
+  renderPenyakitList();
+}
+
 renderPenyakitList();
