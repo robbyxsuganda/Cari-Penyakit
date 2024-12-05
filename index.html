@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="index.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
   </head>
-  <body class="mt-5 body">
+  <body class="mt-5 body" style="display: none">
     <nav class="navbar bg-body-tertiary fixed-top">
       <div class="container">
         <a class="navbar-brand">Caripenyakit.com</a>
@@ -27,24 +27,28 @@
     <div class="container">
       <main>
         <section id="form-section">
+          <h4 id="sapa" class="text-end fst-italic"></h4>
           <h2 id="tambah-ubah">Tambah Data Penyakit</h2>
           <form id="penyakit-form">
             <input type="hidden" id="edit-id" />
 
             <label for="nama" class="form-label">Nama</label>
-            <input type="text" class="form-control" id="nama" placeholder="Nama Penyakit" required />
+            <input type="text" class="form-control" id="nama" placeholder="Masukkan Nama Penyakit" required />
 
             <label for="deskripsi" class="form-label">Deskripsi</label>
-            <input type="text" class="form-control" id="deskripsi" placeholder="Deskripsi Penyakit" required />
+            <input type="text" class="form-control" id="deskripsi" placeholder="Masukkan Deskripsi Penyakit" required />
 
             <label for="gejala" class="form-label">Gejala (pisahkan dengan koma)</label>
-            <input type="text" class="form-control" id="gejala" placeholder="Demam, Sakit Kepala, Setress" required />
+            <input type="text" class="form-control" id="gejala" placeholder="Cth: Demam, Sakit Kepala, Setress" required />
 
             <label for="pengobatan" class="form-label">Pengobatan (pisahkan dengan koma)</label>
-            <input type="text" class="form-control" id="pengobatan" placeholder="Istirahat, Olahraga, Dukun" required />
+            <input type="text" class="form-control" id="pengobatan" placeholder="Cth: Istirahat, Olahraga, Dukun" required />
 
             <label for="gambar" class="form-label">URL Gambar</label>
-            <input type="text" class="form-control" id="gambar" placeholder="https://example.com/gambar.jpg" required />
+            <input type="text" class="form-control" id="gambar" placeholder="Cth: https://example.com/gambar.jpg" required />
+
+            <label for="link" class="form-label">Link URL</label>
+            <input type="text" class="form-control" id="link" placeholder="Cth: https://www.who.int/indonesia" required />
 
             <label for="tingkat" class="form-label">Tingkat Penyakit</label>
             <select id="tingkat" class="form-select" required>
