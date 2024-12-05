@@ -56,3 +56,42 @@ let penyakitList = [
 ];
 
 // console.log(penyakitList);
+
+let editingId = null;
+
+// DOM Elements
+const searchInput = document.getElementById("search");
+const sortSelect = document.getElementById("sort");
+const penyakitForm = document.getElementById("penyakit-form");
+const namaInput = document.getElementById("nama");
+const deskripsiInput = document.getElementById("deskripsi");
+const gejalaInput = document.getElementById("gejala");
+const pengobatanInput = document.getElementById("pengobatan");
+const gambarInput = document.getElementById("gambar");
+const tingkatInput = document.getElementById("tingkat");
+const penyakitListContainer = document.getElementById("penyakit-list");
+const saveButton = document.getElementById("save-button");
+
+function renderPenyakitList() {
+  penyakitListContainer.innerHTML = "";
+
+  penyakitList.forEach((penyakit) => {
+    const penyakitCard = document.createElement("div");
+    penyakitCard.className = "card";
+    penyakitCard.innerHTML = `
+      <img src="${penyakit.gambar}" alt="${penyakit.nama}" />
+      <div class="card-body">
+        <h3>${penyakit.nama}</h3>
+        <p><strong>Deskripsi:</strong> ${penyakit.deskripsi}</p>
+        <p><strong>Gejala:</strong> ${penyakit.gejala.join(", ")}</p>
+        <p><strong>Pengobatan:</strong> ${penyakit.pengobatan.join(", ")}</p>
+        <p><strong>Tingkat Penyakit:</strong> ${penyakit.tingkatPenyakit}</p>
+        <button class="btn btn-warning" onclick="editPenyakit(${penyakit.id})">Ubah</button>
+        <button class="btn btn-danger" onclick="deletePenyakit(${penyakit.id})">Hapus</button>
+      </div>
+    `;
+    penyakitListContainer.appendChild(penyakitCard);
+  });
+}
+
+renderPenyakitList();
