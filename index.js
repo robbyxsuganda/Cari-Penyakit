@@ -60,23 +60,33 @@ let penyakitList = [
 let editingId = null;
 
 // DOM Elements
-const searchInput = document.getElementById("search");
-const sortSelect = document.getElementById("sort");
-const penyakitForm = document.getElementById("penyakit-form");
-const namaInput = document.getElementById("nama");
-const deskripsiInput = document.getElementById("deskripsi");
-const gejalaInput = document.getElementById("gejala");
-const pengobatanInput = document.getElementById("pengobatan");
-const gambarInput = document.getElementById("gambar");
-const tingkatInput = document.getElementById("tingkat");
-const penyakitListContainer = document.getElementById("penyakit-list");
-const saveButton = document.getElementById("save-button");
+let searchInput = document.getElementById("search");
+let sortSelect = document.getElementById("sort");
+let penyakitForm = document.getElementById("penyakit-form");
+let namaInput = document.getElementById("nama");
+let deskripsiInput = document.getElementById("deskripsi");
+let gejalaInput = document.getElementById("gejala");
+let pengobatanInput = document.getElementById("pengobatan");
+let gambarInput = document.getElementById("gambar");
+let tingkatInput = document.getElementById("tingkat");
+let saveButton = document.getElementById("save-button");
 
+// Functions
 function renderPenyakitList() {
-  penyakitListContainer.innerHTML = "";
+  let penyakitListContainer = document.getElementById("penyakit-list");
+  // console.log(penyakitListContainer);
 
-  penyakitList.forEach((penyakit) => {
-    const penyakitCard = document.createElement("div");
+  penyakitListContainer.innerHTML = "";
+  let filteredList = filterAndSortPenyakit();
+  // console.log(filteredList);
+
+  if (filteredList.length === 0) {
+    penyakitListContainer.innerHTML = `<p class="text-center text-danger">Tidak ditemukan hasil pencarian.</p>`;
+    return;
+  }
+
+  filteredList.forEach((penyakit) => {
+    let penyakitCard = document.createElement("div");
     penyakitCard.className = "card";
     penyakitCard.innerHTML = `
       <img src="${penyakit.gambar}" alt="${penyakit.nama}" />
@@ -94,10 +104,46 @@ function renderPenyakitList() {
   });
 }
 
-function editPenyakit(id) {
-  const penyakit = penyakitList.find((p) => p.id === id);
-  // console.log(penyakit);
+function filterAndSortPenyakit() {
+  let searchValue = searchInput.value.toLowerCase();
+  let sortValue = sortSelect.value;
 
+  let filteredList = penyakitList.filter((penyakit) => penyakit.nama.toLowerCase().includes(searchValue) || penyakit.gejala.some((gejala) => gejala.toLowerCase().includes(searchValue)));
+
+  filteredList.sort((a, b) => (sortValue === "asc" ? a.nama.localeCompare(b.nama) : b.nama.localeCompare(a.nama)));
+
+  return filteredList;
+}
+
+function savePenyakit() {
+  if (!validateForm()) {
+    alert("Harap lengkapi semua data sebelum menyimpan.");
+    return;
+  }
+
+  let newPenyakit = {
+    id: editingId || Date.now(),
+    nama: namaInput.value,
+    deskripsi: deskripsiInput.value,
+    gejala: gejalaInput.value.split(",").map((item) => item.trim()),
+    pengobatan: pengobatanInput.value.split(",").map((item) => item.trim()),
+    gambar: gambarInput.value,
+    tingkatPenyakit: tingkatInput.value,
+  };
+
+  if (editingId) {
+    let index = penyakitList.findIndex((penyakit) => penyakit.id === editingId);
+    penyakitList[index] = newPenyakit;
+  } else {
+    penyakitList.push(newPenyakit);
+  }
+
+  resetForm();
+  renderPenyakitList();
+}
+
+function editPenyakit(id) {
+  let penyakit = penyakitList.find((p) => p.id === id);
   editingId = penyakit.id;
   namaInput.value = penyakit.nama;
   deskripsiInput.value = penyakit.deskripsi;
@@ -110,44 +156,28 @@ function editPenyakit(id) {
 
 function deletePenyakit(id) {
   penyakitList = penyakitList.filter((penyakit) => penyakit.id !== id);
-  console.log(penyakitList);
-
   renderPenyakitList();
 }
 
-function savePenyakit() {
-  const newPenyakit = {
-    id: editingId || Date.now(),
-    nama: namaInput.value,
-    deskripsi: deskripsiInput.value,
-    gejala: gejalaInput.value.split(",").map((item) => item.trim()),
-    pengobatan: pengobatanInput.value.split(",").map((item) => item.trim()),
-    gambar: gambarInput.value,
-    tingkatPenyakit: tingkatInput.value,
-  };
-
-  if (editingId) {
-    const index = penyakitList.findIndex((penyakit) => penyakit.id === editingId);
-    penyakitList[index] = newPenyakit;
-  } else {
-    penyakitList.push(newPenyakit);
-  }
-
-  function resetForm() {
-    editingId = null;
-    namaInput.value = "";
-    deskripsiInput.value = "";
-    gejalaInput.value = "";
-    pengobatanInput.value = "";
-    gambarInput.value = "";
-    tingkatInput.value = "";
-    saveButton.textContent = "Simpan";
-  }
-
-  resetForm();
-  renderPenyakitList();
+function resetForm() {
+  editingId = null;
+  namaInput.value = "";
+  deskripsiInput.value = "";
+  gejalaInput.value = "Rendah";
+  pengobatanInput.value = "";
+  gambarInput.value = "";
+  tingkatInput.value = "";
+  saveButton.textContent = "Simpan";
 }
 
+function validateForm() {
+  return namaInput.value.trim() !== "" && deskripsiInput.value.trim() !== "" && gejalaInput.value.trim() !== "" && pengobatanInput.value.trim() !== "" && gambarInput.value.trim() !== "" && tingkatInput.value.trim() !== "";
+}
+
+// Event Listeners
+searchInput.addEventListener("input", renderPenyakitList);
+sortSelect.addEventListener("change", renderPenyakitList);
 saveButton.addEventListener("click", savePenyakit);
 
+// Initial Render
 renderPenyakitList();
