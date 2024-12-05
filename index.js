@@ -115,4 +115,39 @@ function deletePenyakit(id) {
   renderPenyakitList();
 }
 
+function savePenyakit() {
+  const newPenyakit = {
+    id: editingId || Date.now(),
+    nama: namaInput.value,
+    deskripsi: deskripsiInput.value,
+    gejala: gejalaInput.value.split(",").map((item) => item.trim()),
+    pengobatan: pengobatanInput.value.split(",").map((item) => item.trim()),
+    gambar: gambarInput.value,
+    tingkatPenyakit: tingkatInput.value,
+  };
+
+  if (editingId) {
+    const index = penyakitList.findIndex((penyakit) => penyakit.id === editingId);
+    penyakitList[index] = newPenyakit;
+  } else {
+    penyakitList.push(newPenyakit);
+  }
+
+  function resetForm() {
+    editingId = null;
+    namaInput.value = "";
+    deskripsiInput.value = "";
+    gejalaInput.value = "";
+    pengobatanInput.value = "";
+    gambarInput.value = "";
+    tingkatInput.value = "";
+    saveButton.textContent = "Simpan";
+  }
+
+  resetForm();
+  renderPenyakitList();
+}
+
+saveButton.addEventListener("click", savePenyakit);
+
 renderPenyakitList();
