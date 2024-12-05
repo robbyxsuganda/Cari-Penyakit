@@ -55,4 +55,4 @@ let penyakitList = [
   },
 ];
 
-console.log(penyakitList);
+// console.log(penyakitList);
