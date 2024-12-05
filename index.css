@@ -35,3 +35,11 @@ main {
   padding: 0.5rem;
   width: 48%;
 }
+
+#search {
+  width: 30em;
+}
+
+#sort {
+  width: 10em;
+}

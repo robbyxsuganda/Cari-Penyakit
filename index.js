@@ -60,22 +60,32 @@ let penyakitList = [
 let editingId = null;
 
 // DOM Elements
+
+let penyakitListContainer = document.getElementById("penyakit-list");
+// console.log(penyakitListContainer);
 let searchInput = document.getElementById("search");
+// console.log(searchInput);
 let sortSelect = document.getElementById("sort");
+// console.log(sortSelect);
 let penyakitForm = document.getElementById("penyakit-form");
+// console.log(penyakitForm);
 let namaInput = document.getElementById("nama");
+// console.log(namaInput);
 let deskripsiInput = document.getElementById("deskripsi");
+// console.log(deskripsiInput);
 let gejalaInput = document.getElementById("gejala");
+// console.log(gejalaInput);
 let pengobatanInput = document.getElementById("pengobatan");
+// console.log(pengobatanInput);
 let gambarInput = document.getElementById("gambar");
+// console.log(gambarInput);
 let tingkatInput = document.getElementById("tingkat");
+// console.log(tingkatInput);
 let saveButton = document.getElementById("save-button");
+// console.log(saveButton);
 
 // Functions
 function renderPenyakitList() {
-  let penyakitListContainer = document.getElementById("penyakit-list");
-  // console.log(penyakitListContainer);
-
   penyakitListContainer.innerHTML = "";
   let filteredList = filterAndSortPenyakit();
   // console.log(filteredList);
@@ -163,10 +173,10 @@ function resetForm() {
   editingId = null;
   namaInput.value = "";
   deskripsiInput.value = "";
-  gejalaInput.value = "Rendah";
+  gejalaInput.value = "";
   pengobatanInput.value = "";
   gambarInput.value = "";
-  tingkatInput.value = "";
+  tingkatInput.value = "Rendah";
   saveButton.textContent = "Simpan";
 }
 
