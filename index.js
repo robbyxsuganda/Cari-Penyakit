@@ -87,9 +87,10 @@ let warna = document.getElementById("warna");
 // console.log(warna);
 let body = document.querySelector(".body");
 // console.log(body);
+let tambahUbah = document.getElementById("tambah-ubah");
+console.log(tambahUbah);
 
 console.log(warna.value);
-
 
 // Functions
 function renderPenyakitList() {
@@ -98,7 +99,7 @@ function renderPenyakitList() {
   // console.log(filteredList);
 
   if (filteredList.length === 0) {
-    penyakitListContainer.innerHTML = `<p class="text-center text-danger">Tidak ditemukan hasil pencarian.</p>`;
+    penyakitListContainer.innerHTML = `<p class="text-center text-danger">Data Kosong!.</p>`;
     return;
   }
 
@@ -168,7 +169,8 @@ function editPenyakit(id) {
   pengobatanInput.value = penyakit.pengobatan.join(", ");
   gambarInput.value = penyakit.gambar;
   tingkatInput.value = penyakit.tingkatPenyakit;
-  saveButton.textContent = "Update";
+  saveButton.textContent = "Ubah";
+  tambahUbah.textContent = "Ubah Data Penyakit";
 }
 
 function deletePenyakit(id) {
@@ -178,6 +180,7 @@ function deletePenyakit(id) {
 
 function resetForm() {
   editingId = null;
+  tambahUbah.textContent = "Tambah Data Penyakit";
   namaInput.value = "";
   deskripsiInput.value = "";
   gejalaInput.value = "";
@@ -195,7 +198,6 @@ function validateForm() {
 warna.addEventListener("input", function () {
   body.style.backgroundColor = warna.value;
 });
-
 
 // Event Listeners
 searchInput.addEventListener("input", renderPenyakitList);
