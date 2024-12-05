@@ -5,7 +5,7 @@ let penyakitList = [
     deskripsi: "Penyakit yang disebabkan oleh virus dengue melalui gigitan nyamuk Aedes aegypti.",
     gejala: ["Demam tinggi mendadak", "Sakit kepala parah", "Nyeri di belakang mata", "Ruam kulit"],
     pengobatan: ["Istirahat cukup", "Minum banyak cairan", "Kompres demam", "Konsultasi dokter"],
-    gambar: "https://student-activity.binus.ac.id/tfi/wp-content/uploads/sites/41/2023/11/bahaya-depresi.jpeg",
+    gambar: "https://unair.ac.id/wp-content/uploads/2021/07/Ilustrasi-oleh-Merdeka-comm.jpg",
     tingkatPenyakit: "Tinggi",
   },
   {
@@ -14,7 +14,7 @@ let penyakitList = [
     deskripsi: "Penyakit pernapasan ringan yang disebabkan oleh virus.",
     gejala: ["Hidung tersumbat", "Demam ringan", "Bersin", "Batuk"],
     pengobatan: ["Istirahat", "Minum air hangat", "Obat flu bebas"],
-    gambar: "https://student-activity.binus.ac.id/tfi/wp-content/uploads/sites/41/2023/11/bahaya-depresi.jpeg",
+    gambar: "https://prodiaohi.sgp1.digitaloceanspaces.com/app/assets/2014/05/06201928/flu.jpg",
     tingkatPenyakit: "Rendah",
   },
   {
@@ -23,7 +23,7 @@ let penyakitList = [
     deskripsi: "Penyakit akibat gigitan nyamuk Anopheles yang terinfeksi parasit plasmodium.",
     gejala: ["Demam berkala", "Menggigil", "Nyeri otot", "Mual"],
     pengobatan: ["Obat antimalaria", "Konsultasi dokter"],
-    gambar: "https://student-activity.binus.ac.id/tfi/wp-content/uploads/sites/41/2023/11/bahaya-depresi.jpeg",
+    gambar: "https://d1vbn70lmn1nqe.cloudfront.net/prod/wp-content/uploads/2021/12/24072402/Gejala-Malaria-yang-Tidak-Boleh-Dianggap-Sepele-03.jpg",
     tingkatPenyakit: "Tinggi",
   },
   {
@@ -32,7 +32,7 @@ let penyakitList = [
     deskripsi: "Penyakit kronis yang memengaruhi saluran pernapasan.",
     gejala: ["Sesak napas", "Batuk malam hari", "Mengi"],
     pengobatan: ["Inhaler", "Kontrol lingkungan", "Obat antiinflamasi"],
-    gambar: "https://student-activity.binus.ac.id/tfi/wp-content/uploads/sites/41/2023/11/bahaya-depresi.jpeg",
+    gambar: "https://unair.ac.id/wp-content/uploads/2021/11/Foto-by-IDN-Times.jpg",
     tingkatPenyakit: "Sedang",
   },
   {
@@ -41,7 +41,7 @@ let penyakitList = [
     deskripsi: "Infeksi virus yang menyebabkan ruam kulit dengan lepuhan kecil yang gatal.",
     gejala: ["Demam ringan", "Ruam kulit", "Lepuhan berisi cairan"],
     pengobatan: ["Kompres dingin", "Losion kalamin", "Istirahat cukup"],
-    gambar: "https://student-activity.binus.ac.id/tfi/wp-content/uploads/sites/41/2023/11/bahaya-depresi.jpeg",
+    gambar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCbKApzg0Mt3DEAw8JW8yC1TVDfdAy9PMiLg&s",
     tingkatPenyakit: "Sedang",
   },
   {
@@ -50,7 +50,7 @@ let penyakitList = [
     deskripsi: "Tekanan darah tinggi yang dapat meningkatkan risiko penyakit kardiovaskular.",
     gejala: ["Sakit kepala", "Pusing", "Detak jantung tidak teratur"],
     pengobatan: ["Diet sehat", "Olahraga rutin", "Obat antihipertensi"],
-    gambar: "https://student-activity.binus.ac.id/tfi/wp-content/uploads/sites/41/2023/11/bahaya-depresi.jpeg",
+    gambar: "https://d1vbn70lmn1nqe.cloudfront.net/prod/wp-content/uploads/2021/06/10090833/Hipertensi.jpg",
     tingkatPenyakit: "Tinggi",
   },
 ];
@@ -83,6 +83,13 @@ let tingkatInput = document.getElementById("tingkat");
 // console.log(tingkatInput);
 let saveButton = document.getElementById("save-button");
 // console.log(saveButton);
+let warna = document.getElementById("warna");
+// console.log(warna);
+let body = document.querySelector(".body");
+// console.log(body);
+
+console.log(warna.value);
+
 
 // Functions
 function renderPenyakitList() {
@@ -183,6 +190,12 @@ function resetForm() {
 function validateForm() {
   return namaInput.value.trim() !== "" && deskripsiInput.value.trim() !== "" && gejalaInput.value.trim() !== "" && pengobatanInput.value.trim() !== "" && gambarInput.value.trim() !== "" && tingkatInput.value.trim() !== "";
 }
+
+// Ganti Background
+warna.addEventListener("input", function () {
+  body.style.backgroundColor = warna.value;
+});
+
 
 // Event Listeners
 searchInput.addEventListener("input", renderPenyakitList);

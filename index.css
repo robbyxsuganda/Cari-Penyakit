@@ -43,3 +43,7 @@ main {
 #sort {
   width: 10em;
 }
+
+.card img {
+  min-height: 300px;
+}
