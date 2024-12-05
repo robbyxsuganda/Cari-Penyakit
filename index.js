@@ -54,3 +54,5 @@ let penyakitList = [
     tingkatPenyakit: "Tinggi",
   },
 ];
+
+console.log(penyakitList);
